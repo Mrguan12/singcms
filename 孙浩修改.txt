@@ -1,0 +1,3 @@
+1. 删除数据库中cms_menu表中的1菜单管理项、2文章管理项、6文件管理项、9推荐位管理项、10推荐内容管理项、11基本管理改为密码管理
+2. 删除Application/Admin/View目录下的Content文件夹、Menu文件夹、Positioncontent文件夹、Position文件夹
+3. 修改的文件有AdminModel.class.php、BasicController.class.php、Admin/View/Index目录下的index.html与main.html与nav.html与header.html、Admin/View/Basic目录下的index.html、Admin/View/Login目录下的index.html、
