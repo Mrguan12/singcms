@@ -33,11 +33,6 @@ class AdminModel extends Model {
         return  $this->_db->where('admin_id='.$id)->save($data); // 根据条件更新记录
     }
 
-    public function updatePasswordByName($id, $password) {
-        $data['password']=md5($password);
-        return  $this->_db->where('admin_id='.$id)->save($data);
-    }
-
     public function insert($data = array()) {
         if(!$data || !is_array($data)) {
             return 0;
