@@ -75,6 +75,11 @@ function getUserNameById($id) {
     $copyFrom = C("USER_LIST");
     return $copyFrom[$id] ? $copyFrom[$id] : '';
 }
+
+function getCommentById($id) {
+    $copyFrom = C("COMMENT_LIST");
+    return $copyFrom[$id] ? $copyFrom[$id] : '';
+}
 function isThumb($thumb) {
     if($thumb) {
         return '<span style="color:red">有</span>';

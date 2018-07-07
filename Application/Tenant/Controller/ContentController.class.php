@@ -20,11 +20,19 @@ class ContentController extends CommonController {
         $news = D("Order")->getNews($page,$pageSize);
         $count = D("Order")->getNewsCount();
         $navs=D("User")->getUsers();
+        $comment=D("Comment")->getComments();
 
         foreach($navs as $nav) {
             $navlist[$nav['user_id']] = $nav['user_nickname'];
         }
         C('USER_LIST',$navlist);
+
+        foreach($comment as $com) {
+            $comlist[$com['comment_id']] = $com['comment_content'];
+        }
+        echo("<script>console.log('".json_encode($comlist)."');</script>");
+
+        C('COMMENT_LIST',$comlist);
 
         $res  =  new \Think\Page($count,$pageSize);
         $pageres = $res->show();

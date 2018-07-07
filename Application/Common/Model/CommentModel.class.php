@@ -16,6 +16,21 @@ class CommentModel extends Model
         $this->_db = M('comment');
     }
 
+    public function getComments() {
+        $list = $this->_db
+            ->select();
+
+        return $list;
+    }
+
+    public function getNewsCount(){
+        $conditions = array();
+
+        $conditions['status'] = array('neq',-1);
+
+        return $this->_db->where($conditions)->count();
+    }
+
     public function find($id){
         $data = $this->_db->where('comment_id='.$id)->find();
         return $data;

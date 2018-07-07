@@ -13,10 +13,10 @@
 
           <ol class="breadcrumb">
             <li>
-              <i class="fa fa-dashboard"></i>  <a href="/admin.php?c=content">文章管理</a>
+              <i class="fa fa-dashboard"></i>  <a href="/admin.php?m=tenant&c=content">订单管理</a>
             </li>
             <li class="active">
-              <i class="fa fa-table"></i>文章列表
+              <i class="fa fa-table"></i>添加评论
             </li>
           </ol>
         </div>
@@ -66,6 +66,7 @@
                   <th>起租时间</th>
                   <th>退租时间</th>
                   <!--<th>时间</th>-->
+                  <th class="comment">评论</th>
                   <th>状态</th>
                   <th>操作</th>
                 </tr>
@@ -80,6 +81,7 @@
                     <td>{$new.hotel_id}</td>
                     <td>{$new.order_start}</td>
                     <td>{$new.order_end}</td>
+                    <td>{$new.order_id|getCommentById}</td>
                     <td><span  attr-status="<if condition="$new['status'] eq 1">0<else/>1</if>"  attr-id="{$new.order_id}" class="sing_cursor singcms-on-off" id="singcms-on-off" >{$new.status|status}</span></td>
                     <td><span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="{$new.order_id}" ></span>
                       <a href="javascript:void(0)" id="singcms-delete"  attr-id="{$new.order_id}"  attr-message="删除">
