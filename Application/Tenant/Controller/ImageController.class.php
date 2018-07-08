@@ -2,7 +2,9 @@
 /**
  * 图片相关
  */
+
 namespace Tenant\Controller;
+
 use Think\Controller;
 use Think\Upload;
 
@@ -15,7 +17,9 @@ class ImageController extends CommonController {
 
     }
     public function ajaxuploadimage() {
+
         echo("<script>console.log('hello');</script>");
+
         $upload = D("UploadImage");
         $res = $upload->imageUpload();
         if($res===false) {

@@ -2,7 +2,9 @@
 /**
  * basic基本设置
  */
+
 namespace Tentant\Controller;
+
 use Think\Controller;
 use Think\Exception;
 

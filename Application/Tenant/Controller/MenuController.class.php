@@ -2,7 +2,9 @@
 /**
  * 后台菜单相关
  */
+
 namespace Tenant\Controller;
+
 use Think\Controller;
 use Think\Exception;
 

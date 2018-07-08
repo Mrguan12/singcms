@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Tenant\Controller;
+
 use Think\Controller;
 use Think\Upload;
 

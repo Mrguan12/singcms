@@ -2,7 +2,9 @@
 /**
  * 后台Index相关
  */
+
 namespace Tenant\Controller;
+
 use Think\Controller;
 use Think\Exception;
 

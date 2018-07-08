@@ -13,7 +13,9 @@
 
 				<ol class="breadcrumb">
 					<li>
+
 						<i class="fa fa-dashboard"></i>  <a href="/admin.php?m=tenant&c=position">房源管理</a>
+
 					</li>
 					<li class="active">
 						<i class="fa fa-edit"></i> 添加
@@ -28,9 +30,11 @@
 
 				<form class="form-horizontal" id="singcms-form">
 					<div class="form-group">
+
 						<label for="inputcity" class="col-sm-2 control-label">房源的所在城市:</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" value="{$vo.hotel_city}" name="hotel_city" id="inputcity" placeholder="请重新填写房源所在城市">
+
 						</div>
 					</div>
 
@@ -93,6 +97,7 @@
 						<input type="hidden" name="hotel_id" value="{$vo.hotel_id}">
 					</div>
 
+
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="button" class="btn btn-default" id="singcms-button-submit">提交</button>
 						</div>
@@ -116,6 +121,7 @@
 	var SCOPE = {
 		'save_url' : '/admin.php?m=tenant&c=position&a=edithh',
 		'jump_url' : '/admin.php?m=tenant&c=position'
+
 	};
 
 

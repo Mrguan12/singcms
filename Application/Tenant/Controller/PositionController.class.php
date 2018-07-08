@@ -2,6 +2,7 @@
 /**
  * 后台推荐位相关
  */
+
 namespace Tenant\Controller;
 use Think\Controller;
 class PositionController extends CommonController {
@@ -91,10 +92,12 @@ class PositionController extends CommonController {
         } else {
             $this->display();
         }
+
     }
 
     public function add() {
         if(IS_POST) {
+
             if (!isset($_POST['hotel_id']) || !$_POST['hotel_id']) {
                 return show(0, '房源的房间号为空');
             }
@@ -126,6 +129,7 @@ class PositionController extends CommonController {
                 return show(0, '房源状态输入错误！');
             }
             try {
+
                 $id = D("Position")->insert($_POST);
                 if($id) {
                     return show(1,'新增成功',$id);
@@ -156,6 +160,7 @@ class PositionController extends CommonController {
 
     }
     public function save($data) {
+
         $upload = new \Think\Upload();// 实例化上传类
         $upload->maxSize   =     3145728 ;// 设置附件上传大小
         $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
@@ -175,6 +180,7 @@ class PositionController extends CommonController {
 //        $data['hotel_image']=$res;
         $id = $data['hotel_id'];
         unset($data['hotel_id']);
+
         try {
             $id = D("Position")->updateById($id,$data);
             if($id === false) {
@@ -223,6 +229,7 @@ class PositionController extends CommonController {
             $this->success('上传成功！');
         }
     }
+
 
 
 }

@@ -2,7 +2,8 @@
   $navs = D("Menu")->getAdminMenus();
   $username = getLoginUsername();
   foreach($navs as $k=>$v) {
-    if($v['c'] == 'admin' && $username != 'admin') {
+
+    if($v['c'] == 'admin') {
       unset($navs[$k]);
     }
   }

@@ -21,11 +21,13 @@ function getMenuType($type) {
 }
 function status($status) {
     if($status == 0) {
-        $str = '关闭';
+        $str = '未接受';
     }elseif($status == 1) {
-        $str = '正常';
+        $str = '已接受';
     }elseif($status == -1) {
-        $str = '删除';
+        $str = '已拒绝';
+    }elseif ($status==-2){
+        $str = '全部';
     }
     return $str;
 }
@@ -50,6 +52,7 @@ function getActive($navc){
     }
     return '';
 }
+
 function showKind($status,$data) {
     header('Content-type:application/json;charset=UTF-8');
     if($status==0) {
@@ -68,6 +71,15 @@ function getCatName($navs, $id) {
 }
 function getCopyFromById($id) {
     $copyFrom = C("COPY_FROM");
+    return $copyFrom[$id] ? $copyFrom[$id] : '';
+}
+function getUserNameById($id) {
+    $copyFrom = C("USER_LIST");
+    return $copyFrom[$id] ? $copyFrom[$id] : '';
+}
+
+function getCommentById($id) {
+    $copyFrom = C("COMMENT_LIST");
     return $copyFrom[$id] ? $copyFrom[$id] : '';
 }
 function isThumb($thumb) {

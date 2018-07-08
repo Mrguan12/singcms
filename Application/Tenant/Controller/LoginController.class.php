@@ -9,10 +9,12 @@ class LoginController extends Controller {
 
     public function index(){
         if(session('tenantUser')) {
-           $this->redirect('/admin.php?c=index');
+
+           $this->redirect('/admin.php?m=tenant&c=index');
         }
         // admin.php?c=index
         $this->display();
+
     }
 
     public function check() {
@@ -20,13 +22,15 @@ class LoginController extends Controller {
         $password = $_POST['password'];
 
         if(!trim($username)) {
-            return show(0,'用户名不能');
+
+            return show(0,'用户名不能为空');
         }
         if(!trim($password)) {
             return show(0,'密码不能为空');
         }
 
         $ret = D('Tenant')->getAdminByUsername($username);
+
         if(!$ret) {
             return show(0,'该用户不存在');
         }
@@ -44,7 +48,9 @@ class LoginController extends Controller {
 
     public function loginout() {
         session('tenantUser', null);
-        $this->redirect('/admin.php?c=login');
+
+        $this->redirect('/admin.php?m=tenant&c=login');
+
     }
 
 }
