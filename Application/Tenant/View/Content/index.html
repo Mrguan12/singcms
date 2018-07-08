@@ -31,7 +31,7 @@
             <div class="input-group">
               <span class="input-group-addon">栏目</span>
               <select class="form-control" name="catid">
-                <option value='' >订单状态</option>
+                <option value='' >{$status|status}</option>
                 <foreach name="webSiteMenu" item="sitenav">
                   <option value="{$sitenav.menu_id}" >{$sitenav.name}</option>
                 </foreach>
@@ -42,7 +42,7 @@
           <input type="hidden" name="a" value="index"/>
           <div class="col-md-3">
             <div class="input-group">
-              <input class="form-control" name="title" type="text" value="" placeholder="租户昵称" />
+              <input class="form-control" name="title" type="text" value="{$user}" placeholder="租户昵称" />
                 <span class="input-group-btn">
                   <button id="sub_data" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
                 </span>

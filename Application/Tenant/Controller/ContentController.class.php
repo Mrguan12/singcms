@@ -19,14 +19,17 @@ class ContentController extends CommonController {
 
         $conds = array();
         echo("<script>console.log('".json_encode($_GET['title'])."');</script>");
+        $this->assign('user','');
         if($_GET['title']) {
             $title = D("User")->getUserByName($_GET['title']);
             $conds['user_id'] = $title["user_id"];
+            $this->assign('user',$_GET['title']);
         }
         echo("<script>console.log('".json_encode($_GET['catid'])."');</script>");
+        $this->assign('status',-2);
         if($_GET['catid']=='0'||$_GET['catid']=='1') {
-
             $conds['status'] = intval($_GET['catid']);
+            $this->assign('status',$conds['status']);
         }
         echo("<script>console.log('".json_encode($conds)."');</script>");
         $news = D("Order")->getNews($conds,$page,$pageSize);
@@ -58,8 +61,12 @@ class ContentController extends CommonController {
         $sta2=array();
         $sta2['menu_id']=1;
         $sta2['name']='已接受';
+        $sta3=array();
+        $sta3['menu_id']=-2;
+        $sta3['name']='全部';
         $stalist[0]=$sta1;
         $stalist[1]=$sta2;
+        $stalist[2]=$sta3;
 
         $this->assign('webSiteMenu',$stalist);
         $this->display();

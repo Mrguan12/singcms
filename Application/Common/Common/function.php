@@ -26,6 +26,8 @@ function status($status) {
         $str = '已接受';
     }elseif($status == -1) {
         $str = '已拒绝';
+    }elseif ($status==-2){
+        $str = '全部';
     }
     return $str;
 }
