@@ -36,6 +36,13 @@ function getAdminMenuUrl($nav) {
     }
     return $url;
 }
+function getTenantMenuUrl($nav) {
+    $url = '/admin.php?m=tenant&c='.$nav['c'].'&a='.$nav['a'];
+    if($nav['f']=='index') {
+        $url = '/admin.php?m=tenant&c='.$nav['c'];
+    }
+    return $url;
+}
 function getActive($navc){
     $c = strtolower(CONTROLLER_NAME);
     if(strtolower($navc) == $c) {

@@ -10,20 +10,22 @@ class PositionModel extends Model {
 	private $_db = '';
 
 	public function __construct() {
-		$this->_db = M('position');
+		$this->_db = M('hotel');
 	}
 
 	public function select($data = array()) {
 
 		$conditions = $data;
-		$list = $this->_db->where($conditions)->order('id')->select();
+		$list = $this->_db->where($conditions)->order('hotel_id')->select();
 		return $list;
 	}
 
 	public function find($id) {
-		$data = $this->_db->where('id='.$id)->find();
+		$data = $this->_db->where('hotel_id='.$id)->find();
 		return $data;
 	}
+
+
 	public function getCount($data=array()) {
 		$conditions = $data;
 		$list = $this->_db->where($conditions)->count();
@@ -39,7 +41,6 @@ class PositionModel extends Model {
     	if(!$res || !is_array($res)) {
     		return 0;
     	}
-		$res['create_time'] = time();
     	return $this->_db->add($res);
     }
 
@@ -57,7 +58,7 @@ class PositionModel extends Model {
 			throw_exception("ID不合法");
 		}
 		$data['status'] = $status;
-		return  $this->_db->where('id='.$id)->save($data); // 根据条件更新记录
+		return  $this->_db->where('hotel_id='.$id)->save($data); // 根据条件更新记录
 
 	}
 
@@ -69,13 +70,71 @@ class PositionModel extends Model {
 		if(!$data || !is_array($data)) {
 			throw_exception('更新的数据不合法');
 		}
-		return  $this->_db->where('id='.$id)->save($data); // 根据条件更新记录
+		return  $this->_db->where('hotel_id='.$id)->save($data); // 根据条件更新记录
 	}
 	// 获取正常的推荐位内容
 	public function getNormalPositions() {
 		$conditions = array('status'=>1);
-		$list = $this->_db->where($conditions)->order('id')->select();
+		$list = $this->_db->where($conditions)->order('hotel_id')->select();
 		return $list;
 	}
+
+//    public function getNews($page,$pageSize=10) {
+//        $conditions = array();
+//        $conditions['status'] = array('neq',-1);
+//
+//        $offset = ($page - 1) * $pageSize;
+//        $list = $this->_db->where($conditions)
+//            ->order('hotel_id desc')
+//            ->limit($offset,$pageSize)
+//            ->select();
+//
+//        return $list;
+//    }
+
+    public function getNews($data,$page,$pageSize=10) {
+        $conditions = $data;
+        if(isset($data['hotel_type']) && $data['hotel_type']) {
+            $conditions['hotel_type'] = array($data['hotel_type']);
+        }
+        if(isset($data['hotel_city']) && $data['hotel_city'])  {
+            $conditions['hotel_city'] = array($data['hotel_city']);
+        }
+        $conditions['status'] = array('neq',-1);
+        echo("<script>console.log('".json_encode($conditions)."');</script>");
+        $offset = ($page - 1) * $pageSize;
+        $list = $this->_db->where($conditions)
+            ->order('hotel_id desc')
+            ->limit($offset,$pageSize)
+            ->select();
+
+
+
+        return $list;
+
+    }
+
+
+    public function getNewsCount($data = array()){
+        $conditions = $data;
+        if(isset($data['hotel_type']) && $data['hotel_type']) {
+            $conditions['hotel_type'] = array($data['hotel_type']);
+        }
+        if(isset($data['hotel_city']) && $data['hotel_city'])  {
+            $conditions['hotel_city'] = intval($data['hotel_city']);
+        }
+        $conditions['status'] = array('neq',-1);
+
+        return $this->_db->where($conditions)->count();
+    }
+
+//    public function getNewsCount(){
+//        $conditions = array();
+//
+//        $conditions['status'] = array('neq',-1);
+//
+//        return $this->_db->where($conditions)->count();
+//    }
+
 
 }
