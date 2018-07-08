@@ -21,11 +21,14 @@ class UserModel extends Model
     }
 
     public function getUsers(){
-
-
         $list = $this->_db
             ->select();
 
         return $list;
+    }
+
+    public function getUserByName($username='') {
+        $res = $this->_db->where('user_nickname="'.$username.'"')->find();
+        return $res;
     }
 }

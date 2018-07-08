@@ -17,7 +17,19 @@ class ContentController extends CommonController {
         $page = $_REQUEST['p'] ? $_REQUEST['p'] : 1;
         $pageSize = 10;
 
-        $news = D("Order")->getNews($page,$pageSize);
+        $conds = array();
+        echo("<script>console.log('".json_encode($_GET['title'])."');</script>");
+        if($_GET['title']) {
+            $title = D("User")->getUserByName($_GET['title']);
+            $conds['user_id'] = $title["user_id"];
+        }
+        echo("<script>console.log('".json_encode($_GET['catid'])."');</script>");
+        if($_GET['catid']=='0'||$_GET['catid']=='1') {
+
+            $conds['status'] = intval($_GET['catid']);
+        }
+        echo("<script>console.log('".json_encode($conds)."');</script>");
+        $news = D("Order")->getNews($conds,$page,$pageSize);
         $count = D("Order")->getNewsCount();
         $navs=D("User")->getUsers();
         $comment=D("Comment")->getComments();
@@ -30,7 +42,6 @@ class ContentController extends CommonController {
         foreach($comment as $com) {
             $comlist[$com['comment_id']] = $com['comment_content'];
         }
-        echo("<script>console.log('".json_encode($comlist)."');</script>");
 
         C('COMMENT_LIST',$comlist);
 
@@ -41,8 +52,16 @@ class ContentController extends CommonController {
         $this->assign('news',$news);
         $this->assign('navlist',$navlist);
 
+        $sta1=array();
+        $sta1['menu_id']=0;
+        $sta1['name']='未接受';
+        $sta2=array();
+        $sta2['menu_id']=1;
+        $sta2['name']='已接受';
+        $stalist[0]=$sta1;
+        $stalist[1]=$sta2;
 
-        $this->assign('webSiteMenu',D("Menu")->getBarMenus());
+        $this->assign('webSiteMenu',$stalist);
         $this->display();
 
     }

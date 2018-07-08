@@ -17,9 +17,14 @@ class OrderModel extends Model
         $this->_db = M('order');
     }
 
-    public function getNews($page,$pageSize=10) {
-        $conditions = array();
-        $conditions['status'] = array('neq',-1);
+    public function getNews($data,$page,$pageSize=10) {
+        $conditions = $data;
+
+        if(isset($data['status']) || $data['status']==0)  {
+        }
+        else{
+            $conditions['status'] = array('neq',-1);
+        }
 
         $offset = ($page - 1) * $pageSize;
         $list = $this->_db->where($conditions)
