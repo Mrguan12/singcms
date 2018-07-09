@@ -63,22 +63,28 @@ class PositionController extends CommonController {
             if ($_POST['status'] != 0 && $_POST['status'] != 1) {
                 return show(0, '房源状态输入错误！');
             }
-
-            if($_POST['hotel_id']) {
-                return $this->save($_POST);
-            }
-            try {
-                $id = D("Position")->insert($_POST);
-                if ($id) {
-                    return show(1, '新增成功', $id);
+            D("Himage")->deleteById($_POST['hotel_id']);
+            $urlList=explode(' ',$_POST['hotel_image']);
+            $data=array();
+            $dataList=array();
+            $data['hotel_id']=$_POST['hotel_id'];
+            $data['status']=1;
+            foreach ($urlList as $url){
+                if($url){
+                    $data['url']=$url;
+                    $dataList[count($dataList)]=$data;
                 }
-                return show(0, '新增失败', $id);
-
-
-            } catch (Exception $e) {
-                return show(0, $e->getMessage());
             }
-            return show(0, '新增失败', $newsId);
+            D('Himage')->insert($dataList);
+            try {
+                $id = D("Position")->updateById($_POST);
+                if($id === false) {
+                    return show(0,'更新失败');
+                }
+                return show(1,'更新成功');
+            }catch (Exception $e) {
+                return show(0,$e->getMessage());
+            }
         } else {
             $this->display();
         }
@@ -121,6 +127,7 @@ class PositionController extends CommonController {
             $data=array();
             $dataList=array();
             $data['hotel_id']=$_POST['hotel_id'];
+            $data['status']=1;
             foreach ($urlList as $url){
                 if($url){
                     $data['url']=$url;

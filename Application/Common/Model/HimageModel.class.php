@@ -27,4 +27,8 @@ class HimageModel extends Model
         $data = $this->_db->where('hotel_id='.$id)->select();
         return $data;
     }
+    public function deleteById($id){
+        $data['status']=0;
+        return $this->_db->where('hotel_id='.$id)->save($data);
+    }
 }
