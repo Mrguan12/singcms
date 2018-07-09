@@ -55,18 +55,12 @@
 					<div class="form-group">
 						<label  class="col-sm-2 control-label">房间图片为:</label>
 						<div class="col-sm-5">
-							<input id="file_upload" name="hotel_image"  type="file" multiple="true" value="{$vo.hotel_image}">
+
+							<input id="file_upload" type="file" multiple="true">
 							<img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
-							<!--<input id="file_upload_image" type="hidden" multiple="true" value="">-->
+							<input id="file_upload_image" name="hotel_image" type="hidden" multiple="true" value="">
 						</div>
 					</div>
-
-					<!--<div class="form-group">-->
-						<!--<label for="inputimage" class="col-sm-2 control-label">房源的图片:</label>-->
-						<!--<div class="col-sm-5">-->
-							<!--<input type="text" class="form-control" value="{$vo.hotel_image}" name="hotel_image" id="inputimage" placeholder="请重新填写房源图片">-->
-						<!--</div>-->
-					<!--</div>-->
 
 					<div class="form-group">
 						<label for="inputsize" class="col-sm-2 control-label">房源的房间规格:</label>
@@ -116,11 +110,16 @@
 </div>
 <!-- /#page-wrapper -->
 
+<script src="/Public/js/tenant/image.js"></script>
+
 </div>
 <script>
 	var SCOPE = {
 		'save_url' : '/admin.php?m=tenant&c=position&a=edithh',
-		'jump_url' : '/admin.php?m=tenant&c=position'
+
+		'jump_url' : '/admin.php?m=tenant&c=position',
+        'ajax_upload_image_url' : '/admin.php?m=tenant&c=image&a=ajaxuploadimage',
+        'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
 
 	};
 

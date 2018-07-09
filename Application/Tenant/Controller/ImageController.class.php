@@ -18,10 +18,12 @@ class ImageController extends CommonController {
     }
     public function ajaxuploadimage() {
 
-        echo("<script>console.log('hello');</script>");
+
+
 
         $upload = D("UploadImage");
         $res = $upload->imageUpload();
+
         if($res===false) {
             return show(0,'上传失败','');
         }else{

@@ -140,6 +140,19 @@ function status($status) {
         $str = '已拒绝';
     }elseif ($status==-2){
         $str = '全部';
+
+    }
+    return $str;
+}
+function positionStatus($status) {
+    if($status == 0) {
+        $str = '不显示';
+    }elseif($status == 1) {
+        $str = '显示';
+    }elseif($status == -1) {
+        $str = '已删除';
+    }elseif ($status==-2){
+        $str = '全部';
     }
     return $str;
 }
@@ -164,6 +177,7 @@ function getActive($navc){
     }
     return '';
 }
+
 function showKind($status,$data) {
     header('Content-type:application/json;charset=UTF-8');
     if($status==0) {

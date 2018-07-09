@@ -81,7 +81,9 @@
                                 <td>{$position.hotel_size}</td>
                                 <td>{$position.hotel_type}</td>
                                 <td>{$position.hotel_cost}</td>
-                                <td><span  attr-status="<if condition="$position['status'] eq 1">0<else/>1</if>"  attr-id="{$position.hotel_id}" class="sing_cursor singcms-on-off" id="singcms-on-off" >{$position.status|status}</span></td>
+
+                                <td><span  attr-status="<if condition="$position['status'] eq 1">0<else/>1</if>"  attr-id="{$position.hotel_id}" class="sing_cursor singcms-on-off" id="singcms-on-off" >{$position.status|positionStatus}</span></td>
+
 
                                 <td>
                                     <span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="{$position.hotel_id}" ></span>
@@ -123,6 +125,9 @@
     var SCOPE = {
         'edit_url' : '/admin.php?m=tenant&c=position&a=edit',
         'set_status_url' : '/admin.php?m=tenant&c=position&a=setStatus',
+
+        'succeed_url' : '/admin.php?m=tenant&c=position',
+
         'add_url' : '/admin.php?m=tenant&c=position&a=add',
 
     }
