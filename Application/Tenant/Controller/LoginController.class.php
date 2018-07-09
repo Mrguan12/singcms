@@ -39,7 +39,6 @@ class LoginController extends Controller {
             return show(0,'密码错误');
         }
 
-
         session('tenantUser', $ret);
         return show(1,'登录成功');
 
