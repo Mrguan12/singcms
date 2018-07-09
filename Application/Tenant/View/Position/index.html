@@ -1,0 +1,139 @@
+<include file="Index/header" />
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+<div id="page-wrapper">
+
+    <div class="container-fluid" >
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <ol class="breadcrumb">
+
+                    <li class="active">
+                        <i class="fa fa-table"></i>  房源管理
+
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div >
+            <button url="/admin.php?c=position&a=add" id="button-add" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加 </button>
+        </div>
+
+        <div class="row">
+            <form action="/tenant.php" method="get">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">类型</span>
+                        <select class="form-control" name="hotel_type">
+                            <option value='' >全部类型</option>
+                            <foreach name="webSiteMenu" item="sitenav">
+                                <option value="{$sitenav.name}" >{$sitenav.name}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <input type="hidden" name="c" value="position"/>
+                <input type="hidden" name="a" value="index"/>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input class="form-control" name="hotel_city" type="text" value="" placeholder="城市名称" />
+                        <span class="input-group-btn">
+                  <button id="sub_data" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <h3></h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover singcms-table">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>所在城市</th>
+                            <th>所在县</th>
+                            <th>所在街道</th>
+                            <th>规格</th>
+                            <th>房源类型</th>
+                            <th>价格(\天)</th>
+                            <th>房源状态</th>
+                            <th>操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="positions" id="position">
+                            <tr>
+                                <td>{$position.hotel_id}</td>
+                                <td>{$position.hotel_city}</td>
+                                <td>{$position.hotel_county}</td>
+                                <td>{$position.hotel_street}</td>
+                                <td>{$position.hotel_size}</td>
+                                <td>{$position.hotel_type}</td>
+                                <td>{$position.hotel_cost}</td>
+
+                                <td><span  attr-status="<if condition="$position['status'] eq 1">0<else/>1</if>"  attr-id="{$position.hotel_id}" class="sing_cursor singcms-on-off" id="singcms-on-off" >{$position.status|positionStatus}</span></td>
+
+
+                                <td>
+                                    <span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="{$position.hotel_id}" ></span>
+                                    <a href="javascript:void(0)" id="singcms-delete"  attr-id="{$position.hotel_id}"  attr-message="删除">
+                                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                        </volist>
+
+                        </tbody>
+                    </table>
+
+                    <ul >
+                        {$pageres}
+                    </ul>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+    var SCOPE = {
+        'edit_url' : '/admin.php?m=tenant&c=position&a=edit',
+        'set_status_url' : '/admin.php?m=tenant&c=position&a=setStatus',
+
+        'succeed_url' : '/admin.php?m=tenant&c=position',
+
+        'add_url' : '/admin.php?m=tenant&c=position&a=add',
+
+    }
+    $(".singcms-table #sing-add-position-content").on('click',function(){
+        var id = $(this).attr('attr-id');
+        window.location.href='/admin.php?c=positioncontent&a=index&position_id='+id;
+    });
+</script>
+<include file="Index/footer" />
