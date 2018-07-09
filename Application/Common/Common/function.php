@@ -31,6 +31,18 @@ function status($status) {
     }
     return $str;
 }
+function positionStatus($status) {
+    if($status == 0) {
+        $str = '不显示';
+    }elseif($status == 1) {
+        $str = '显示';
+    }elseif($status == -1) {
+        $str = '已删除';
+    }elseif ($status==-2){
+        $str = '全部';
+    }
+    return $str;
+}
 function getAdminMenuUrl($nav) {
     $url = '/admin.php?c='.$nav['c'].'&a='.$nav['a'];
     if($nav['f']=='index') {
