@@ -137,7 +137,7 @@ class PositionController extends CommonController {
             if ($_POST['status']!=0&&$_POST['status']!=1) {
                 return show(0, '房源状态输入错误！');
             }
-
+            $_POST['owner_id']=session('tenantid');
             $urlList=explode(' ',$_POST['hotel_image']);
             $data=array();
             $dataList=array();
