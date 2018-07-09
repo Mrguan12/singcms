@@ -1,0 +1,118 @@
+<include file="Index/header" />
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <div id="page-wrapper">
+
+        <div class="container-fluid" >
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <ol class="breadcrumb">
+
+                        <li class="active">
+                            <i class="fa fa-table"></i>{$nav}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+            <!--<div >-->
+            <!--<button url="/admin.php?c=position&a=add" id="button-add" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加 </button>-->
+            <!--</div>-->
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3></h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover singcms-table">
+                            <thead>
+                            <tr>
+                                <th>订单id</th>
+                                <th>租户id</th>
+                                <th>出租者id</th>
+                                <th>房屋id</th>
+                                <th>房屋地址</th>
+                                <th>订单状态</th>
+                                <!--<th>操作</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="orders" id="order">
+                                <tr>
+                                    <td>{$order.order_id}</td>
+                                    <td>{$order.user_id}</td>
+                                    <td>{$order.owner_id}</td>
+                                    <td>{$order.hotel_id}</td>
+                                    <td>{$order.hotel_city}{$order.hotel_county}{$order.hotel_street}</td>
+                                    <td>
+                                        <?php
+                                        $s = $order['state'];
+                                        switch($s){
+                                            case 1:
+                                                echo "未提交";
+                                                break;
+                                            case 2:
+                                                echo "正在进行";
+                                                break;
+                                            case 3:
+                                                echo "已完成";
+                                                break;
+                                            default:
+                                                echo "已关闭";
+                                        }
+                                    ?>
+                                    </td>
+                                    <!--<td>-->
+                                        <!--&lt;!&ndash;<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="{$position.id}" ></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<a href="javascript:void(0)" id="singcms-delete"  attr-id="{$position.id}"  attr-message="删除">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span  id="delete" attr-id="{$order.order_id}" ><a href="#" >查看详情</a></span>&ndash;&gt;-->
+
+                                    <!--</td>-->
+                                </tr>
+                            </volist>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+    // var SCOPE = {
+    //     'edit_url' : '/admin.php?c=position&a=edit',
+    //     'set_status_url' : '/admin.php?c=position&a=setStatus',
+    //     'add_url' : '/admin.php?c=position&a=add',
+    // }
+    // $(".singcms-table #sing-add-position-content").on('click',function(){
+    //     var id = $(this).attr('attr-id');
+    //     window.location.href='/admin.php?c=positioncontent&a=index&position_id='+id;
+    // });
+    // $("span").on('click',function(){
+    //     var judge = confirm("确认删除此用户？");
+    //     if (judge == true) {
+    //         var id = $(this).attr('attr-id');
+    //         window.location.href = '/admin.php?m=platformadmin&c=lessor&a=delete&id=' + id;
+    //     }
+    // });
+
+</script>
+<include file="Index/footer" />

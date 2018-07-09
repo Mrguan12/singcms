@@ -18,6 +18,7 @@ class IndexController extends CommonController {
         $this->assign('positioncount', $positionCount);
         $this->assign('admincount', $adminCount);
         $this->display();
+
     }
 
 }
