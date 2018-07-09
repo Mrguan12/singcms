@@ -29,6 +29,21 @@ function status($status) {
     }
     return $str;
 }
+function identity($identity) {
+    if($identity == 'admin'){
+        $str = "系统管理员";
+    }
+    if($identity == 'platformadmin'){
+        $str = "平台管理员";
+    }
+    if($identity == 'tenant'){
+        $str = "出租者";
+    }
+    if($identity == 'lessor'){
+        $str = "租客";
+    }
+    return $str;
+}
 function getAdminMenuUrl($nav) {
     $url = '/admin.php?c='.$nav['c'].'&a='.$nav['a'];
     if($nav['f']=='index') {
