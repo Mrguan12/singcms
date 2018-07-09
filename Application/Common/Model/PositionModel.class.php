@@ -79,26 +79,16 @@ class PositionModel extends Model {
 		return $list;
 	}
 
-//    public function getNews($page,$pageSize=10) {
-//        $conditions = array();
-//        $conditions['status'] = array('neq',-1);
-//
-//        $offset = ($page - 1) * $pageSize;
-//        $list = $this->_db->where($conditions)
-//            ->order('hotel_id desc')
-//            ->limit($offset,$pageSize)
-//            ->select();
-//
-//        return $list;
-//    }
-
     public function getNews($data,$page,$pageSize=10) {
         $conditions = $data;
         if(isset($data['hotel_type']) && $data['hotel_type']) {
-            $conditions['hotel_type'] = array($data['hotel_type']);
+            $conditions['hotel_type'] = $data['hotel_type'];
         }
         if(isset($data['hotel_city']) && $data['hotel_city'])  {
-            $conditions['hotel_city'] = array($data['hotel_city']);
+            $conditions['hotel_city'] = $data['hotel_city'];
+        }
+        if(isset($data['owner_id']) && $data['owner_id'])  {
+            $conditions['owner_id'] = $data['owner_id'];
         }
         $conditions['status'] = array('neq',-1);
         echo("<script>console.log('".json_encode($conditions)."');</script>");
@@ -107,34 +97,24 @@ class PositionModel extends Model {
             ->order('hotel_id desc')
             ->limit($offset,$pageSize)
             ->select();
-
-
-
         return $list;
 
     }
 
-
     public function getNewsCount($data = array()){
         $conditions = $data;
         if(isset($data['hotel_type']) && $data['hotel_type']) {
-            $conditions['hotel_type'] = array($data['hotel_type']);
+            $conditions['hotel_type'] = $data['hotel_type'];
         }
         if(isset($data['hotel_city']) && $data['hotel_city'])  {
-            $conditions['hotel_city'] = intval($data['hotel_city']);
+            $conditions['hotel_city'] = $data['hotel_city'];
+        }
+        if(isset($data['owner_id']) && $data['owner_id'])  {
+            $conditions['owner_id'] = $data['owner_id'];
         }
         $conditions['status'] = array('neq',-1);
 
         return $this->_db->where($conditions)->count();
     }
-
-//    public function getNewsCount(){
-//        $conditions = array();
-//
-//        $conditions['status'] = array('neq',-1);
-//
-//        return $this->_db->where($conditions)->count();
-//    }
-
 
 }

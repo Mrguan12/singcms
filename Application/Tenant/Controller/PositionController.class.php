@@ -7,6 +7,7 @@ namespace Tenant\Controller;
 use Think\Controller;
 class PositionController extends CommonController {
     const UPLOAD = 'upload';
+    const USERNAME='';
     public function index()
     {
         $conds = array();
@@ -18,8 +19,9 @@ class PositionController extends CommonController {
         if($hotel_type) {
             $conds['hotel_type'] = $hotel_type;
         }
-
-
+        if(session('tenantid')){
+            $conds['owner_id']=session('tenantid');
+        }
         $page = $_REQUEST['p'] ? $_REQUEST['p'] : 1;
         $pageSize = 10;
         $news = D("Position")->getNews($conds,$page,$pageSize);
@@ -30,19 +32,6 @@ class PositionController extends CommonController {
         $this->assign('positions',$news);
         $this->assign('webSiteMenu',D("Menu")->getBarMenus());
         $this->display();
-
-
-
-//        $page = $_REQUEST['p'] ? $_REQUEST['p'] : 1;
-//        $pageSize = 10;
-//        $news = D("Position")->getNews($page,$pageSize);
-//        $count = D("Position")->getNewsCount();
-//        $res  =  new \Think\Page($count,$pageSize);
-//        $pageres = $res->show();
-//        $this->assign('pageres',$pageres);
-//        $this->assign('positions',$news);
-//        $this->assign('webSiteMenu',D("Menu")->getBarMenus());
-//        $this->display();
     }
 
 

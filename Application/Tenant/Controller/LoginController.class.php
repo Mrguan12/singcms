@@ -8,10 +8,9 @@ use Think\Controller;
 class LoginController extends Controller {
 
     public function index(){
-        if(session('tenantUser')) {
-
-           $this->redirect('/admin.php?m=tenant&c=index');
-        }
+//        if(session('tenantUser')) {
+//           $this->redirect('/admin.php?m=tenant&c=index');
+//        }
         // admin.php?c=index
         $this->display();
 
@@ -40,6 +39,7 @@ class LoginController extends Controller {
         }
 
 
+        session('tenantid',$ret['tenant_id']);
         session('tenantUser', $ret);
         return show(1,'登录成功');
 
