@@ -21,7 +21,6 @@ $("#singcms-button-submit").click(function(){
     $(data).each(function(i){
        postData[this.name] = this.value;
     });
-    // postData['hotel_image'] = $("#file_upload").val()
 
     console.log(postData);
     // 将获取到的数据post给服务器

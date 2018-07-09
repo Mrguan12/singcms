@@ -15,12 +15,10 @@ $(function() {
             if(response) {
                 var obj = JSON.parse(data); //由JSON字符串转换为JSON对象
 
-
                 $('#' + file.id).find('.data').html(' 上传完毕');
-
+                var val=$("#file_upload_image").attr('value')+' '+obj.data;
                 $("#upload_org_code_img").attr("src",obj.data);
-                $("#file_upload_image").attr('value',obj.data);
-
+                $("#file_upload_image").attr('value',val);
                 $("#upload_org_code_img").show();
             }else{
                 alert('上传失败');

@@ -18,6 +18,7 @@ class PositionController extends CommonController {
         if($hotel_type) {
             $conds['hotel_type'] = $hotel_type;
         }
+        
 
 
         $page = $_REQUEST['p'] ? $_REQUEST['p'] : 1;
@@ -97,7 +98,6 @@ class PositionController extends CommonController {
 
     public function add() {
         if(IS_POST) {
-
             if (!isset($_POST['hotel_id']) || !$_POST['hotel_id']) {
                 return show(0, '房源的房间号为空');
             }
@@ -128,15 +128,20 @@ class PositionController extends CommonController {
             if ($_POST['status']!=0&&$_POST['status']!=1) {
                 return show(0, '房源状态输入错误！');
             }
-            try {
-
-                $id = D("Position")->insert($_POST);
-                if($id) {
-                    return show(1,'新增成功',$id);
+            $urlList=explode(' ',$_POST['hotel_image']);
+            $data=array();
+            $dataList=array();
+            $data['hotel_id']=$_POST['hotel_id'];
+            foreach ($urlList as $url){
+                if($url){
+                    $data['url']=$url;
+                    $dataList[count($dataList)]=$data;
                 }
-                return show(0,'新增失败',$id);
-
-
+            }
+            D('Himage')->insert($dataList);
+            try {
+                $id=D("Position")->insert($_POST);
+                return show(1,'新增成功',$id);
             }catch(Exception $e) {
                 return show(0, $e->getMessage());
             }
@@ -150,12 +155,13 @@ class PositionController extends CommonController {
      * 编辑页面
      */
     public function edit() {
-        $data = array(
-            'status' => array('neq',-1),
-        );
+
         $id = $_GET['id'];
         $position = D("Position")->find($id);
+        $image=D("Himage")->find($id);
+        echo("<script>console.log('".json_encode($image[0])."');</script>");
         $this->assign('vo', $position);
+        $this->assign('image',$image);
         $this->display();
 
     }

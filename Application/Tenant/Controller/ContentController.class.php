@@ -31,7 +31,7 @@ class ContentController extends CommonController {
             $conds['status'] = intval($_GET['catid']);
             $this->assign('status',$conds['status']);
         }
-        echo("<script>console.log('".json_encode($conds)."');</script>");
+
         $news = D("Order")->getNews($conds,$page,$pageSize);
         $count = D("Order")->getNewsCount();
         $navs=D("User")->getUsers();

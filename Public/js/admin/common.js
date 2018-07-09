@@ -47,7 +47,7 @@ $('.singcms-table #singcms-delete').on('click',function(){
     var a = $(this).attr("attr-a");
     var message = $(this).attr("attr-message");
     var url = SCOPE.set_status_url;
-
+    var succeed=SCOPE.succeed_url;
     data = {};
     data['id'] = id;
     data['status'] = -1;
@@ -62,19 +62,19 @@ $('.singcms-table #singcms-delete').on('click',function(){
         scrollbar: true,
         yes: function(){
             // 执行相关跳转
-            todelete(url, data);
+            todelete(url, data,succeed);
         },
 
     });
 
 });
-function todelete(url, data) {
+function todelete(url, data,$succeed) {
     $.post(
         url,
         data,
         function(s){
             if(s.status == 1) {
-                return dialog.success(s.message,'');
+                return dialog.success(s.message,$succeed);
                 // 跳转到相关页面
             }else {
                 return dialog.error(s.message);
@@ -114,7 +114,7 @@ $('.singcms-table #singcms-on-off').on('click', function(){
     var id = $(this).attr('attr-id');
     var status = $(this).attr("attr-status");
     var url = SCOPE.set_status_url;
-
+    var succeed=SCOPE.succeed_url;
     data = {};
     data['id'] = id;
     data['status'] = status;
@@ -129,7 +129,7 @@ $('.singcms-table #singcms-on-off').on('click', function(){
         scrollbar: true,
         yes: function(){
             // 执行相关跳转
-            todelete(url, data);
+            todelete(url, data,succeed);
         },
 
     });
