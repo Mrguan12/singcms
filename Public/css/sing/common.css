@@ -38,3 +38,18 @@
 }
 .sing_cursor{cursor:pointer}
 .sing_green{color:#308014}
+
+.comment{width: 200px}
+#imageList{
+    /*overflow-x: auto;*/
+    /*overflow-y: hidden;*/
+    height:180px;
+
+    white-space: nowrap;
+
+}
+#imageList img{
+    width:auto;
+    height:100%;
+    margin-right:10px;
+}

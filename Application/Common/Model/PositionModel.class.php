@@ -62,15 +62,9 @@ class PositionModel extends Model {
 
 	}
 
-	public function updateById($id, $data) {
+	public function updateById($data) {
 
-		if(!$id || !is_numeric($id)) {
-			throw_exception("ID不合法");
-		}
-		if(!$data || !is_array($data)) {
-			throw_exception('更新的数据不合法');
-		}
-		return  $this->_db->where('hotel_id='.$id)->save($data); // 根据条件更新记录
+		return  $this->_db->where('hotel_id='.$data['hotel_id'])->save($data); // 根据条件更新记录
 	}
 	// 获取正常的推荐位内容
 	public function getNormalPositions() {

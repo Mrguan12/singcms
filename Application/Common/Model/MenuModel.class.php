@@ -89,4 +89,13 @@ class MenuModel extends  Model {
             ->select();
         return $res;
     }
+
+    public function getAdminMenu() {
+        $data = array(
+            'status' => 2,
+            'type' => 0,
+        );
+
+        return $this->_db->where($data)->select();
+    }
 }

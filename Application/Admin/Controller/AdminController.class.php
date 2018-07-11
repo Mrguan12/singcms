@@ -11,7 +11,21 @@ class AdminController extends CommonController {
 
     public function index() {
         $admins = D('Admin')->getAdmins();
-        $this->assign('admins', $admins);
+        $output = array();
+        $judge = array('admin','platformadmin','tenant','lessor');
+        if(isset($_REQUEST['type']) && in_array($_REQUEST['type'], $judge)) {
+            foreach ($admins as $a){
+                if($a['identity'] == $_REQUEST['type']){
+                    array_push($output, $a);
+                }
+            }
+            $this->assign('type', array_search($_REQUEST['type'], $judge));
+            $this->assign('admins', $output);
+        }else{
+            $this->assign('type',-1);
+            $this->assign('admins', $admins);
+        }
+        
         $this->display();
     }
 

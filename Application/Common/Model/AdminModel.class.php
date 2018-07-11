@@ -75,4 +75,8 @@ class AdminModel extends Model {
         return $res['tp_count'];
     }
 
+    public function updatePasswordByName($id, $password) {
+        $data['password']=md5($password);
+        return  $this->_db->where('admin_id='.$id)->save($data);
+    }
 }

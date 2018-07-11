@@ -26,6 +26,29 @@
         </div>
         <!-- /.row -->
         
+        <div class="row">
+            <form action="/admin.php" method="get">
+                <div class="input-group">
+                    <span class="input-group-addon">用户类型筛选</span>
+                    <select class="form-control" name="type">
+                        <option value='' >请选择类型</option>
+                        
+                        <option value="admin" <if condition="$type eq 0">selected="selected"</if>>系统管理员</option>
+                        <option value="platformadmin" <if condition="$type eq 1">selected="selected"</if>>平台管理员</option>
+                        <option value="tenant" <if condition="$type eq 2">selected="selected"</if>>出租者</option>
+                        <option value="lessor" <if condition="$type eq 3">selected="selected"</if>>租客</option>
+                    <lect>
+                </div>
+
+                <input type="hidden" name="c" value="admin"/>
+                <input type="hidden" name="a" value="index"/>
+                <span class="input-group-btn">
+                  <button id="sub_data" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i><tton>
+                </span>
+
+            </form>
+        </div>
+
         <div>
           <button  id="button-add" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加 </button>
         </div>
@@ -40,6 +63,8 @@
                             <th>id</th>
                             <th>用户名</th>
                             <th>真实姓名</th>
+                            <th>用户类型</th>
+                            <th>年龄</th>
                             <th>最后登录时间</th>
                             <th>状态</th>
                             <th>操作</th>
@@ -52,6 +77,8 @@
                                 <td>{$vo.admin_id}</td>
                                 <td>{$vo.username}</td>
                                 <td>{$vo.realname}</td>
+                                <td>{$vo.identity|identity}</td>
+                                <td>{$vo.age}</td>
                                 <td>{$vo.lastlogintime|date="Y-m-d H:i",###}</td>
                                 <td><span  attr-status="<if condition="$vo['status'] eq 1">0<else/>1</if>"  attr-id="{$vo.admin_id}" class="sing_cursor singcms-on-off" id="singcms-on-off" >{$vo.status|status}</span></td>
                                 <td>    <a href="javascript:void(0)" attr-id="{$vo.admin_id}" id="singcms-delete"  attr-a="admin" attr-message="删除"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a></td>
