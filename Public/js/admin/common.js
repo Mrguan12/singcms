@@ -29,6 +29,7 @@ $("#singcms-button-submit").click(function(){
         }
     },"JSON");
 });
+
 /*
 编辑模型
  */
