@@ -14,11 +14,10 @@ $(function() {
             // response true ,false
             if(response) {
                 var obj = JSON.parse(data); //由JSON字符串转换为JSON对象
-
-
+                var image="<img id=\"upload_org_code_img\" style=\"float:left;display: inline-block\" src=\""+obj.data+"\" width=\"150\" height=\"150\">";
+                $('#imageList').append(image);
                 $('#' + file.id).find('.data').html(' 上传完毕');
                 var val=$("#file_upload_image").attr('value')+' '+obj.data;
-                $("#upload_org_code_img").attr("src",obj.data);
                 $("#file_upload_image").attr('value',val);
                 $("#upload_org_code_img").show();
             }else{

@@ -183,3 +183,14 @@ $("#singcms-push").click(function(){
     },"json");
 
 });
+
+/**
+ *点击图片删除
+ */
+$("#imageList").delegate("#upload_org_code_img","click",function(){
+    var del=$(this).attr("src");
+    var url=$("#file_upload_image").attr("value").split(del);
+    var val=url[0]+" "+url[1];
+    $("#file_upload_image").attr('value',val);
+    $(this).remove();
+});

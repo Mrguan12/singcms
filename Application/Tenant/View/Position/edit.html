@@ -57,8 +57,12 @@
 						<div class="col-sm-5">
 
 							<input id="file_upload" type="file" multiple="true">
-							<img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
-							<input id="file_upload_image" name="hotel_image" type="hidden" multiple="true" value="">
+							<div id="imageList">
+								<volist name="image" id="img">
+									<img style="float:left;display: inline-block" id="upload_org_code_img" src="{$img.url}" width="150" height="150">
+								</volist>
+							</div>
+							<input id="file_upload_image" name="hotel_image" type="hidden" multiple="true" value="{$val}">
 						</div>
 					</div>
 
@@ -95,7 +99,8 @@
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="button" class="btn btn-default" id="singcms-button-submit">提交</button>
 						</div>
-					</div>
+
+
 				</form>
 
 

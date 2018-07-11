@@ -23,9 +23,8 @@ class HimageModel extends Model
         }
         return $this->_db->addAll($data);
     }
-    public function find($id){
-        $data = $this->_db->where('hotel_id='.$id)->select();
-        return $data;
+    public function find($data){
+        return $this->_db->where($data)->select();
     }
     public function deleteById($id){
         $data['status']=0;
