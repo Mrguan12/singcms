@@ -173,16 +173,10 @@ class PositionController extends CommonController {
         $data['hotel_id']=$id;
         $data['status']=1;
         $image=D("Himage")->find($data);
-        echo("<script>console.log('".json_encode($image[0])."');</script>");
-        $img=$image[0];
-        $val=$img["url"]+" ";
-        $img=$image[1];
-        $val=$val+$img["url"]+" ";
-        $img=$image[2];
-        $val=$val+$img["url"];
-//        foreach ($image as $ima){
-//            $val=$val+$ima['url']+' ';
-//        }
+        $val='';
+        foreach ($image as $ima){
+            $val=$val.$ima['url'].' ';
+        }
         echo("<script>console.log('".json_encode($val)."');</script>");
         $this->assign('val',$val);
         $this->assign('vo', $position);
