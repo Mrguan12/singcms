@@ -125,7 +125,7 @@ $('.singcms-table #singcms-on-off').on('click', function(){
         btn: ['yes', 'no'],
         icon : 3,
         closeBtn : 2,
-        content: "是否确定更改状态",
+        content: "是否确定预订房屋",
         scrollbar: true,
         yes: function(){
             // 执行相关跳转
