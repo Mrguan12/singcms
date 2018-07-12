@@ -18,19 +18,24 @@ class ContentController extends CommonController {
         $pageSize = 10;
 
         $conds = array();
-        echo("<script>console.log('".json_encode($_GET['title'])."');</script>");
         $this->assign('user','');
         if($_GET['title']) {
             $title = D("User")->getUserByName($_GET['title']);
             $conds['user_id'] = $title["user_id"];
             $this->assign('user',$_GET['title']);
         }
-        echo("<script>console.log('".json_encode($_GET['catid'])."');</script>");
         $this->assign('status',-2);
         if($_GET['catid']=='0'||$_GET['catid']=='1') {
             $conds['status'] = intval($_GET['catid']);
             $this->assign('status',$conds['status']);
         }
+        $hotelList=D("Position")->getHotelsById(session("tenantid"));
+        $cond=array();
+        foreach ($hotelList as $hotel){
+            array_push($cond,intval($hotel['hotel_id']));
+        }
+        echo("<script>console.log('".json_encode($cond)."');</script>");
+        $conds['hotel_id'] = array('in',implode(',', $cond));
         $news = D("Order")->getNews($conds,$page,$pageSize);
         $count = D("Order")->getNewsCount();
         $navs=D("User")->getUsers();

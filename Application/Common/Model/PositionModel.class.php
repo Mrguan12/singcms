@@ -111,4 +111,8 @@ class PositionModel extends Model {
         return $this->_db->where($conditions)->count();
     }
 
+    public function getHotelsById($id){
+        return $this->_db->where('owner_id='.$id)->select();
+    }
+
 }
