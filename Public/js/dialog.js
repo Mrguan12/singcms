@@ -19,6 +19,7 @@ var dialog = {
         });
     },
 
+
     // 确认弹出层
     confirm : function(message, url) {
         layer.open({

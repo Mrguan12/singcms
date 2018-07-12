@@ -58,24 +58,34 @@ class RequestController extends CommonController{
         }
         
        
-        $data = M('hotel as a')->join('cms_himage as b ON b.hotel_id = a.hotel_id')->order('a.hotel_id DESC')->find();
-        $info = M('hotel as a')->join('cms_himage as b ON b.hotel_id = a.hotel_id')->order('a.hotel_id DESC')->limit(3)->select();
-        $hotel1 = M('hotel as a')->join('cms_himage as b ON b.hotel_id = a.hotel_id')->order('a.hotel_id DESC')->limit('3,5')->select();
-        $hotels = M('hotel as a')->join('cms_himage as b ON b.hotel_id = a.hotel_id')->order('rand()')->limit(4)->select();
+        $data = M('hotel as a')->order('a.hotel_id DESC')->find();
+        $info = M('hotel as a')->order('a.hotel_id DESC')->limit(3)->select();
+        $hotel1 = M('hotel as a')->order('a.hotel_id DESC')->limit('3,5')->select();
+        $hotels = M('hotel as a')->order('rand()')->limit(4)->select();
         $this->assign('hotel1',$hotel1);
         $this->assign('data',$data);
         $this->assign('info',$info);
-        $this->assign('hotel',$hotel);
         $this->assign('hotels',$hotels);
-        $this->assign('result',$result);
         $this->assign('form',$form);
+        if($_SESSION['adminUser']['identity'] == 'admin'){
+            $url = '/admin.php?c=admin&a=personal';
+        }
+        else if($_SESSION['adminUser']['identity'] == 'platformadmin'){
+            $url = '/admin.php?m=platformadmin&c=index&a=personal';
+        }
+        else if($_SESSION['adminUser']['identity'] == 'lessor'){
+            $url = '/admin.php?m=tenant&c=index&a=personal';
+        }
+        else{
+            $url = '/admin.php?m=lessor&c=index&a=personal';
+        }
 
         $ret = $_SESSION['adminUser'];
         if($ret){
             $words = '<a href="#" class="dropdown-toggle sel" data-toggle="dropdown">' .getLoginUsername(). '<b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li>
-          <a href="/admin.php?m=platformadmin&c=index&a=personal"><i class="fa fa-fw fa-user"></i> 个人中心</a>
+          <a href="'.$url.'"><i class="fa fa-fw fa-user"></i> 个人中心</a>
         </li>
        
         <li class="divider"></li>

@@ -29,7 +29,7 @@
     </style>
 
 </head>
-<body>
+
 
 
 <ul class="nav navbar-right top-nav">
@@ -50,30 +50,31 @@
 </ul>
 
 
-<header id="header" style="position: fixed; z-index:1000;margin-right:0px ;width:100%">
+<!--<header id="header" style="position: fixed; z-index:1000;margin-right:0px ;width:100%">-->
     <div class="navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <a href="/">
+                <a href="/admin.php?m=index">
                     <img src="/Public/images/logo.png" alt="">
                 </a>
             </div>
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="http://localhost/admin.php?m=index&c=index">首页</a></li>
-                <li><a href="/" class="curr" >求租</a></li><li><a href="http://localhost/admin.php?m=index&c=rent" >出租</a></li>
+                <li><a href="/admin.php?m=index&c=index">首页</a></li>
+                <li><a href="/" class="curr" >求租</a></li><li><a href="/admin.php?m=index&c=rent" >出租</a></li>
             </ul>
         </div>
     </div>
-</header>
+<!--</header>-->
+
+
+<body background="city_bg.jpg" style=" background-repeat:no-repeat ;
+                  background-size:cover;
+                  background-attachment: fixed;">
 
 <section>
 
     <div class="container">
-    <body background="city_bg.jpg"
-          style=" background-repeat:no-repeat ;
-                  background-size:cover;
-                  background-attachment: fixed;"
-    >
+
     
      </br></br></br></br></br>
 
@@ -92,7 +93,13 @@
       <form name="condition" method="POST" action="/admin.php?m=index&c=request&a=index" >
         
          <dt class="fl">地区：</dt>
-            
+            <input type="radio" value="" name="address" >不限
+            <input type="radio" value="环翠" name="address" >环翠
+            <input type="radio" value="文登" name="address" >文登
+            <input type="radio" value="高区" name="address" >高区
+            <input type="radio" value="经区" name="address" >经区
+            <input type="radio" value="天河" name="address" >天河
+            <input type="radio" value="蜀山" name="address" >蜀山
             
          <dt class="fl">租金：</dt>
            <!-- <input type="radio" value="" name="price" >不限  -->
@@ -124,7 +131,7 @@
                 <volist name="form" id="form">
                 <div class="news-list">
                     <dl>
-                        <dt><a target="_blank" href="/index.php?c=detail&id=24">{$form.hotel_type}&nbsp;&nbsp;{$form.hotel_city}&nbsp;&nbsp;{$form.hotel_county}</a></dt>
+                        <dt><span style="color:#000066">{$form.hotel_type}&nbsp;&nbsp;{$form.hotel_city}&nbsp;&nbsp;{$form.hotel_county}</span></dt>
                         
                         <dd class="news-intro">
                             

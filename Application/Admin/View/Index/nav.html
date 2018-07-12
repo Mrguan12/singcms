@@ -13,7 +13,7 @@
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     
-    <a class="navbar-brand" >singcms内容管理平台</a>
+    <a class="navbar-brand" href="admin.php?c=index">内部管理平台</a>
   </div>
   <!-- Top Menu Items -->
   <ul class="nav navbar-right top-nav">
@@ -37,7 +37,7 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav nav_list">
       <li {$index|getActive}>
-        <a href="/admin.php"><i class="fa fa-fw fa-dashboard"></i> 首页</a>
+        <a href="/admin.php?&m=index&c=index"><i class="fa fa-fw fa-dashboard"></i> 首页</a>
       </li>
       <volist name="navs" id="navo">
       <li {$navo.c|getActive}>

@@ -1,0 +1,197 @@
+<include file="Index/header" />
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+<div id="page-wrapper">
+
+	<div class="container-fluid">
+
+		<!-- Page Heading -->
+		<div class="row">
+			<div class="col-lg-12">
+
+				<ol class="breadcrumb">
+					<li>
+
+						<i class="fa fa-dashboard"></i>  <a href="/admin.php?m=tenant&c=position">房源管理</a>
+
+					</li>
+					<li class="active">
+						<i class="fa fa-edit"></i> 添加
+					</li>
+				</ol>
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<div class="row">
+			<div class="col-lg-6">
+
+				<form class="form-horizontal" id="singcms-form">
+
+					<div class="form-group">
+						<div class="form-horizontal">
+							<div class="input-group">
+								<span class="input-group-addon">房源所在省份：</span>
+								<select id="cityselect" class="form-control" name="hotel_city">
+									<option name="hotel_city" value='{$vo.hotel_city}' >{$vo.hotel_city}</option>
+									<foreach name="Menu" item="sitenav">
+										<option value="{$sitenav.cityname}" >{$sitenav.cityname}</option>
+									</foreach>
+								</select>
+							</div>
+						</div>
+
+
+						<div class="form-horizontal">
+							<div class="input-group">
+								<span class="input-group-addon">房源所在城市：</span>
+								<select class="form-control" name="hotel_county" id="counties">
+									<option value='{$vo.hotel_county}' >{$vo.hotel_county}</option>
+									<foreach name="county['北京']" item="sitenav" id="countyselect">
+										<option value="{$sitenav.cityname}" >{$sitenav.cityname}</option>
+									</foreach>
+								</select>
+							</div>
+						</div>
+
+
+
+					<!--<div class="form-group">-->
+
+						<!--<label for="inputcity" class="col-sm-2 control-label">房源的所在城市:</label>-->
+						<!--<div class="col-sm-5">-->
+							<!--<input type="text" class="form-control" value="{$vo.hotel_city}" name="hotel_city" id="inputcity" placeholder="请重新填写房源所在城市">-->
+
+						<!--</div>-->
+					<!--</div>-->
+
+					<!--<div class="form-group">-->
+						<!--<label for="inputcounty" class="col-sm-2 control-label">房源的所在县市:</label>-->
+						<!--<div class="col-sm-5">-->
+							<!--<input type="text" class="form-control" value="{$vo.hotel_county}" name="hotel_county" id="inputcounty" placeholder="请重新填写房源所在县市">-->
+						<!--</div>-->
+					<!--</div>-->
+
+					<div class="form-group">
+						<label for="inputstreet" class="col-sm-2 control-label">房源的所在街道:</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" value="{$vo.hotel_street}" name="hotel_street" id="inputstreet" placeholder="请重新填写房源所在街道">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label  class="col-sm-2 control-label">房间图片为:</label>
+						<div class="col-sm-5">
+
+							<input id="file_upload" type="file" multiple="true">
+							<div id="imageList">
+								<volist name="image" id="img">
+									<img style="float:left;display: inline-block" id="upload_org_code_img" src="{$img.url}" width="150" height="150">
+								</volist>
+							</div>
+							<input id="file_upload_image" name="hotel_image" type="hidden" multiple="true" value="{$val}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputsize" class="col-sm-2 control-label">房源的房间规格:</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" value="{$vo.hotel_size}" name="hotel_size" id="inputsize" placeholder="请重新填写房源的房间规格">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputtype" class="col-sm-2 control-label">房源的房间类型:</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" value="{$vo.hotel_type}" name="hotel_type" id="inputtype" placeholder="请重新填写房源的房间类型">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputcost" class="col-sm-2 control-label">房源的房间价格:</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" value="{$vo.hotel_cost}" name="hotel_cost" id="inputcost" placeholder="请重新填写房源的房间价格">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputcost" class="col-sm-2 control-label">房源的起租时间：</label>
+						<div class="col-sm-5">
+							<input type="date" name="start_time" value="{$vo.start_time}" class="form-control" id="inputdata" placeholder="请选择房源的起租时间">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputcost" class="col-sm-2 control-label">房源的可租时间：</label>
+						<div class="col-sm-5">
+							<input type="text" name="limit_months" value="{$vo.limit_months}" class="form-control" id="inputmonth" placeholder="请选择房源的可租时间">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" name="status" value="{$vo.status}">
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" name="hotel_id" value="{$vo.hotel_id}">
+					</div>
+
+
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="button" class="btn btn-default" id="singcms-button-submit">提交</button>
+						</div>
+
+
+				</form>
+
+
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+
+<script src="/Public/js/tenant/image.js"></script>
+
+</div>
+<script>
+	var SCOPE = {
+		'save_url' : '/admin.php?m=tenant&c=position&a=edithh',
+
+		'jump_url' : '/admin.php?m=tenant&c=position',
+        'ajax_upload_image_url' : '/admin.php?m=tenant&c=image&a=ajaxuploadimage',
+        'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+
+	};
+
+
+    $("#cityselect").change(function () {
+        let tempDom = "";
+        var url='/admin.php?m=tenant&c=position&a=citysele';
+        var data={};
+        data['id']=$("#cityselect").val()
+
+        $.post(url,data,function (result) {
+            // console.log(result.message);
+            tempDom += "<option value='' >请选择城市</option>"
+            let data = result.message;
+            for (let i=0;i<data.length;i++){
+                tempDom +='<option value="'+data[i].cityname+'" >'+data[i].cityname+'</option>'
+            }
+            $("#counties").html(tempDom)
+
+        },"JSON")
+    })
+
+
+</script>
+<!-- /#wrapper -->
+<script type="text/javascript" src="/Public/js/admin/form.js"></script>
+<include file="Index/footer" />

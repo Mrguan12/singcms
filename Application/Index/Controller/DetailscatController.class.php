@@ -16,7 +16,7 @@ class DetailscatController extends CommonController
         $id = $_GET['id'];
 
 
-        $List   =   D('list');
+        $List   =   D('order');
         if($List->create()) {
             $result =   $List->add();
             if($result) {

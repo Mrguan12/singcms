@@ -8,14 +8,29 @@ use Think\Controller;
 class LoginController extends Controller {
 
     public function index(){
-        if(session('adminUser')) {
-           $this->redirect('/admin.php?c=index');
+        $ret = $_SESSION['adminUser'];
+        if($ret){
+//            if($ret['admin_identity'] == 'admin') {
+//                $this->redirect('/admin.php?c=index');
+//            }
+//            else if($ret['admin_identity'] == 'platformadmin') {
+//                $this->redirect('/admin.php?m=platformadmin&c=index');
+//            }
+//            else if($ret['admin_identity'] == 'platformadmin'){
+//                $this->redirect('https://www.baidu.com');
+//            }
+//            else{
+//                $this->redirect('https://www.bilibili.com');
+//            }
+            $this->redirect('/admin.php?m=index&c=index');
         }
+
         // admin.php?c=index
         $this->display();
     }
 
     public function check() {
+
         $username = $_POST['username'];
         $password = $_POST['password'];
         if(!trim($username)) {
@@ -27,24 +42,32 @@ class LoginController extends Controller {
 
         $ret = D('Admin')->getAdminByUsername($username);
         if(!$ret || $ret['status'] !=1) {
-            return show(0,'该用户不存在');
+            return show(0,'该用户不存在或已被禁止登陆');
         }
 
         if($ret['password'] != getMd5Password($password)) {
             return show(0,'密码错误');
         }
-
         D("Admin")->updateByAdminId($ret['admin_id'],array('lastlogintime'=>time()));
 
         session('adminUser', $ret);
-        return show(1,'登录成功');
-
-
+        if($ret['identity'] == 'admin'){
+            return show(1,'登陆成功');
+        }
+        else if($ret['identity'] == 'platformadmin'){
+            return show(2,'登陆成功');
+        }
+        else if($ret['identity'] == 'lessor'){
+            return show(3,'登陆成功');
+        }
+        else{
+            return show(4,'登陆成功');
+        }
     }
 
     public function loginout() {
         session('adminUser', null);
-        $this->redirect('/admin.php?c=login');
+        $this->redirect('/admin.php?m=index&c=index');
     }
 
 }
