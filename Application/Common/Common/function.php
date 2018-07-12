@@ -21,11 +21,11 @@ function getMenuType($type) {
 }
 function status($status) {
     if($status == 0) {
-        $str = '关闭';
+        $str = '不可租';
     }elseif($status == 1) {
-        $str = '正常';
+        $str = '可租';
     }elseif($status == -1) {
-        $str = '删除';
+        $str = '不可租';
     }
     return $str;
 }
