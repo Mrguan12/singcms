@@ -1,4 +1,5 @@
 <include file="Index/header" />
+
 <body>
 <div id="wrapper">
 
@@ -38,19 +39,69 @@
 					</div>
 
 					<div class="form-group">
+							<div class="form-horizontal">
+								<div class="input-group">
+									<span class="input-group-addon">房源所在省份：</span>
+									<select id="cityselect" class="form-control" name="hotel_city">
+										<option name="hotel_city" value='' >请选择省份</option>
+										<foreach name="Menu" item="sitenav">
+											<option value="{$sitenav.cityname}" >{$sitenav.cityname}</option>
+										</foreach>
+									</select>
+								</div>
+							</div>
 
-						<label for="inputname" class="col-sm-2 control-label">房源所在城市：</label>
-						<div class="col-sm-5">
-							<input type="text" name="hotel_city" class="form-control" id="inputname" placeholder="请填写房源所在城市">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label for="inputhotelcounty" class="col-sm-2 control-label">房源所在县市:</label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="hotel_county" id="inputhotelcounty" placeholder="请填写房源所在县市">
-						</div>
-					</div>
+							<div class="form-horizontal">
+								<div class="input-group">
+									<span class="input-group-addon">房源所在城市：</span>
+									<select class="form-control" name="hotel_county" id="counties">
+										<option value='' >请选择城市</option>
+										<foreach name="county['北京']" item="sitenav" id="countyselect">
+											<option value="{$sitenav.cityname}" >{$sitenav.cityname}</option>
+										</foreach>
+									</select>
+								</div>
+							</div>
+							<!--<div class="form-horizontal">-->
+								<!--<div class="input-group">-->
+									<!--<span class="input-group-addon">房源所在街道：</span>-->
+									<!--<select class="form-control" name="hotel_street">-->
+										<!--<option value='' >请选择县市</option>-->
+										<!--<foreach name="Menu" item="sitenav">-->
+											<!--<option value="{$sitenav.cityName}" >{$sitenav.cityName}</option>-->
+										<!--</foreach>-->
+									<!--</select>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<input type="hidden" name="c" value="position"/>-->
+							<!--<input type="hidden" name="a" value="index"/>-->
+							<!--<div class="col-md-3">-->
+								<!--<div class="input-group">-->
+									<!--<input class="form-control" name="hotel_city" type="text" value="" placeholder="城市名称" />-->
+									<!--<span class="input-group-btn">-->
+									  <!--<button id="sub_data" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>-->
+									<!--</span>-->
+								<!--</div>-->
+							<!--&lt;!&ndash;</div>&ndash;&gt;-->
+					<!--</div>-->
+
+
+
+					<!--<div class="form-group">-->
+
+						<!--<label for="inputname" class="col-sm-2 control-label">房源所在城市：</label>-->
+						<!--<div class="col-sm-5">-->
+							<!--<input type="text" name="hotel_city" class="form-control" id="inputname" placeholder="请填写房源所在城市">-->
+						<!--</div>-->
+					<!--</div>-->
+
+					<!--<div class="form-group">-->
+						<!--<label for="inputhotelcounty" class="col-sm-2 control-label">房源所在县市:</label>-->
+						<!--<div class="col-sm-5">-->
+							<!--<input type="text" class="form-control" name="hotel_county" id="inputhotelcounty" placeholder="请填写房源所在县市">-->
+						<!--</div>-->
+					<!--</div>-->
 
 					<div class="form-group">
 						<label for="inputhotelstreet" class="col-sm-2 control-label">房源所在街道:</label>
@@ -129,6 +180,23 @@
     };
 
 
+        $("#cityselect").change(function () {
+            let tempDom = "";
+            var url='/admin.php?m=tenant&c=position&a=citysele';
+            var data={};
+            data['id']=$("#cityselect").val()
+
+			$.post(url,data,function (result) {
+                // console.log(result.message);
+                tempDom += "<option value='' >请选择城市</option>"
+                let data = result.message;
+                for (let i=0;i<data.length;i++){
+                    tempDom +='<option value="'+data[i].cityname+'" >'+data[i].cityname+'</option>'
+                }
+                $("#counties").html(tempDom)
+
+            },"JSON")
+        })
 
 </script>
 <!-- /#wrapper -->

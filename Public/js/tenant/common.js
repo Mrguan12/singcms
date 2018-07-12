@@ -47,6 +47,13 @@ $('.singcms-table #singcms-edit').on('click',function(){
 });
 
 
+// $("#cityselect").change(function(){
+//
+//     edit_url = '/admin.php?m=tenant&c=position&a=add';
+//     var url = edit_url + '&id='+$("#cityselect").val();
+//     window.location.href=url;
+// });
+
 /**
  * 删除操作JS
  */

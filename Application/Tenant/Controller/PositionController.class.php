@@ -50,6 +50,7 @@ class PositionController extends CommonController {
 
     public function edithh()
     {
+
         if (IS_POST) {
             if (!isset($_POST['hotel_city']) || !$_POST['hotel_city']) {
                 return show(0, '房源的房间所在城市为空');
@@ -104,7 +105,26 @@ class PositionController extends CommonController {
 
     }
 
+    public function citysele(){
+//        if(IS_POST){
+//            return show(1,$_POST);
+//        }
+
+//        echo("<script>console.log('".json_encode("54654564456645")."');</script>");
+        if(IS_POST) {
+            $m=D("Area")->getMenu();
+            $county='';
+            foreach ($m as $a){
+                $county[$a['cityname']]=D("Area")->getCounty($a['codeid']);
+            }
+            return show(1,$county[$_POST['id']]);
+        }
+
+    }
+
     public function add() {
+
+
         if(IS_POST) {
 
             if (!isset($_POST['hotel_id']) || !$_POST['hotel_id']) {
@@ -157,7 +177,16 @@ class PositionController extends CommonController {
                 return show(0, $e->getMessage());
             }
             return show(0, '新增失败',$newsId);
-        }else {
+
+        }else{
+            $this->assign('Menu',D("Area")->getMenu());
+            $m=D("Area")->getMenu();
+            $county='';
+            foreach ($m as $a){
+                $county[$a['cityname']]=D("Area")->getCounty($a['codeid']);
+            }
+            $this->assign('county',$county);
+            echo("<script>console.log('".json_encode("55151516")."');</script>");
             $this->display();
         }
 
@@ -166,8 +195,6 @@ class PositionController extends CommonController {
      * 编辑页面
      */
     public function edit() {
-
-
         $id = $_GET['id'];
         $position = D("Position")->find($id);
         $data['hotel_id']=$id;
