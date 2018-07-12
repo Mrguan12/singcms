@@ -52,6 +52,7 @@ class PositionController extends CommonController {
     {
 
         if (IS_POST) {
+//            echo("<script>console.log('".json_encode($_POST)."');</script>");
             if (!isset($_POST['hotel_city']) || !$_POST['hotel_city']) {
                 return show(0, '房源的房间所在城市为空');
             }
@@ -100,6 +101,13 @@ class PositionController extends CommonController {
                 return show(0,$e->getMessage());
             }
         } else {
+            $this->assign('Menu',D("Area")->getMenu());
+            $m=D("Area")->getMenu();
+            $county='';
+            foreach ($m as $a){
+                $county[$a['cityname']]=D("Area")->getCounty($a['codeid']);
+            }
+            $this->assign('county',$county);
             $this->display();
         }
 
@@ -186,7 +194,7 @@ class PositionController extends CommonController {
                 $county[$a['cityname']]=D("Area")->getCounty($a['codeid']);
             }
             $this->assign('county',$county);
-            echo("<script>console.log('".json_encode("55151516")."');</script>");
+//            echo("<script>console.log('".json_encode("55151516")."');</script>");
             $this->display();
         }
 
@@ -204,10 +212,19 @@ class PositionController extends CommonController {
         foreach ($image as $ima){
             $val=$val.$ima['url'].' ';
         }
-        echo("<script>console.log('".json_encode($val)."');</script>");
+//        echo("<script>console.log('".json_encode($val)."');</script>");
         $this->assign('val',$val);
         $this->assign('vo', $position);
         $this->assign('image',$image);
+
+        $this->assign('Menu',D("Area")->getMenu());
+        $m=D("Area")->getMenu();
+        $county='';
+        foreach ($m as $a){
+            $county[$a['cityname']]=D("Area")->getCounty($a['codeid']);
+        }
+        $this->assign('county',$county);
+
         $this->display();
 
     }

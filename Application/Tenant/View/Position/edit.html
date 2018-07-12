@@ -29,21 +29,50 @@
 			<div class="col-lg-6">
 
 				<form class="form-horizontal" id="singcms-form">
-					<div class="form-group">
-
-						<label for="inputcity" class="col-sm-2 control-label">房源的所在城市:</label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" value="{$vo.hotel_city}" name="hotel_city" id="inputcity" placeholder="请重新填写房源所在城市">
-
-						</div>
-					</div>
 
 					<div class="form-group">
-						<label for="inputcounty" class="col-sm-2 control-label">房源的所在县市:</label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" value="{$vo.hotel_county}" name="hotel_county" id="inputcounty" placeholder="请重新填写房源所在县市">
+						<div class="form-horizontal">
+							<div class="input-group">
+								<span class="input-group-addon">房源所在省份：</span>
+								<select id="cityselect" class="form-control" name="hotel_city">
+									<option name="hotel_city" value='{$vo.hotel_city}' >{$vo.hotel_city}</option>
+									<foreach name="Menu" item="sitenav">
+										<option value="{$sitenav.cityname}" >{$sitenav.cityname}</option>
+									</foreach>
+								</select>
+							</div>
 						</div>
-					</div>
+
+
+						<div class="form-horizontal">
+							<div class="input-group">
+								<span class="input-group-addon">房源所在城市：</span>
+								<select class="form-control" name="hotel_county" id="counties">
+									<option value='{$vo.hotel_county}' >{$vo.hotel_county}</option>
+									<foreach name="county['北京']" item="sitenav" id="countyselect">
+										<option value="{$sitenav.cityname}" >{$sitenav.cityname}</option>
+									</foreach>
+								</select>
+							</div>
+						</div>
+
+
+
+					<!--<div class="form-group">-->
+
+						<!--<label for="inputcity" class="col-sm-2 control-label">房源的所在城市:</label>-->
+						<!--<div class="col-sm-5">-->
+							<!--<input type="text" class="form-control" value="{$vo.hotel_city}" name="hotel_city" id="inputcity" placeholder="请重新填写房源所在城市">-->
+
+						<!--</div>-->
+					<!--</div>-->
+
+					<!--<div class="form-group">-->
+						<!--<label for="inputcounty" class="col-sm-2 control-label">房源的所在县市:</label>-->
+						<!--<div class="col-sm-5">-->
+							<!--<input type="text" class="form-control" value="{$vo.hotel_county}" name="hotel_county" id="inputcounty" placeholder="请重新填写房源所在县市">-->
+						<!--</div>-->
+					<!--</div>-->
 
 					<div class="form-group">
 						<label for="inputstreet" class="col-sm-2 control-label">房源的所在街道:</label>
@@ -127,6 +156,25 @@
         'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
 
 	};
+
+
+    $("#cityselect").change(function () {
+        let tempDom = "";
+        var url='/admin.php?m=tenant&c=position&a=citysele';
+        var data={};
+        data['id']=$("#cityselect").val()
+
+        $.post(url,data,function (result) {
+            // console.log(result.message);
+            tempDom += "<option value='' >请选择城市</option>"
+            let data = result.message;
+            for (let i=0;i<data.length;i++){
+                tempDom +='<option value="'+data[i].cityname+'" >'+data[i].cityname+'</option>'
+            }
+            $("#counties").html(tempDom)
+
+        },"JSON")
+    })
 
 
 </script>
