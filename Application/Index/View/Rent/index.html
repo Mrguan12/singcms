@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C2C房屋出租网</title>
+    <meta name="keywords" content="C2C房屋出租" />
+    <meta name="description" content="本网站提供房屋出租服务" />
+    <link rel="stylesheet" href="/Public/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/Public/css/home/main.css" type="text/css" />
+
+
+    <script src="/Public/js/jquery.js"></script>
+    <script src="/Public/js/bootstrap.min.js"></script>
+    <script src="/Public/js/dialog/layer.js"></script>
+    <script src="/Public/js/dialog.js"></script>
+    <script type="text/javascript" src="/Public/js/party/jquery.uploadify.js"></script>
+
+    <style>
+        .sel {
+            width: 89px;
+            height: 50px;
+            top: 2px;
+            right: 20px;
+            position: absolute;
+            background: #ffffff;
+        }
+        
+       
+    </style>
+
+</head>
+<body>
+
+
+<ul class="nav navbar-right top-nav">
+    <li class="dropdown">
+        <!--<a href="#" class="sel" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 </a>-->
+        <!--<ul class="dropdown-menu">-->
+            <!--<li>-->
+                <!--<a href="/admin.php?m=platformadmin&c=index&a=personal"><i class="fa fa-fw fa-user"></i> 个人中心</a>-->
+            <!--</li>-->
+
+            <!--<li class="divider"></li>-->
+            <!--<li>-->
+                <!--<a href="/admin.php?c=login&a=loginout"><i class="fa fa-fw fa-power-off"></i> 退出</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+        {$words}
+    </li>
+</ul>
+
+
+<header id="header" style="position: fixed; z-index:1000;margin-right:0px ;width:100%">
+    <div class="navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/">
+                    <img src="/Public/images/logo.png" alt="">
+                </a>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="http://localhost/admin.php?m=index&c=index">首页</a></li> 
+                <li><a href="http://localhost/admin.php?m=index&c=request" >求租</a></li><li><a href="/" class="curr" >出租</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<section>
+
+    <div class="container">
+    <body background="city_bg.jpg"
+          style=" background-repeat:no-repeat ;
+                  background-size:cover;
+                  background-attachment: fixed;"
+    >
+    
+     </br></br></br></br></br>
+
+     <form name="search" method="POST" action="/admin.php?m=index&c=rent&a=index">
+            <div id="searchkey">
+                <em></em>
+                <span id="key"><input type="text" size=50 style="height:45px"   name="search"   ></span>
+                 &nbsp;&nbsp;&nbsp;
+                <input type="submit" value="搜房源" name="button"  style="height:45px" >             
+            </div>
+
+     </form>
+        </br></br>
+     <div class="search_bd" style="border:solid ;border-color:gray">
+    <!--区域展示start-->
+      <form name="condition" method="POST" action="/admin.php?m=index&c=rent&a=index" >
+        
+         <dt class="fl">地区：</dt>
+           
+            
+         <dt class="fl">租金：</dt>
+           <!-- <input type="radio" value="" name="price" >不限  -->
+            <span class="prifilter">
+                        <span class="text">
+                            <input type="text" name="minprice" muti="1" min="0" max="999999" >
+                                   
+                        </span>
+                        <span class="dev"> - </span>
+                        <span class="text">
+                            <input type="text" name="maxprice" muti="1" min="0" max="999999" >
+                                  
+                        </span>
+                        <span class="dev">元</span>
+                        
+                    </span>
+        
+         <div style="margin-right:20px">
+          <input type="submit" value="筛选" name="select">
+         </div>
+        
+     </form>
+         
+     
+    </div>
+        <div class="row">
+            <div class="col-sm-9 col-md-9">
+                
+                <volist name="hotel" id="hotel">
+                <div class="news-list">
+                    <dl>
+                        <dt><a target="_blank" href="/index.php?m=index&c=detailscat&id={$hotel.hotel_id}">{$hotel.hotel_size}平方米&nbsp;&nbsp;&nbsp;{$hotel.hotel_cost}元/月</a></dt>
+                        <dd class="news-img">
+                            <a target="_blank" href="/index.php?c=detail&id=24"><img width="200" height="120" src="{$hotel.url_1}" alt="图片不存在！"></a>
+                        </dd>
+                        <dd class="news-intro">
+                            {$hotel.hotel_city}&nbsp;&nbsp;{$hotel.hotel_county}
+                        </dd>
+                        <dd class="news-info">
+                            {$hotel.start_time}后可以入住，{$hotel.limit_months}个月起租
+                        </dd>
+                    </dl>
+                </div>
+                </volist>
+            </div>
+            <!--网站右侧信息-->
+            <div class="col-sm-3 col-md-3">
+                <div class="right-title">
+                    <h3>房屋信息推荐</h3>
+                    <span>Recommend</span>
+                </div>
+
+                <div class="right-content">
+                    <ul>
+                        <volist name="hotels" id="hotels">
+                            <li class="num{$key+1} curr">
+                                <a target="_blank" href="/index.php?c=detail&id=21">{$hotels.hotel_city}&nbsp;&nbsp;{$hotels.hotel_county}</a>
+                                <div class="intro">
+                                    {$hotels.hotel_size}平方米&nbsp;&nbsp;&nbsp;{$hotels.hotel_cost}元/月
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+
+</body>
+<script src="/Public/js/jquery.js"></script>
+<script src="/Public/js/count.js"></script>
+
+<script language="JavaScript">
+    function judgeLogin(){
+
+    }
+</script>
+</html>

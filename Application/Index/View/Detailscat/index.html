@@ -1,0 +1,197 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C2C房屋出租网</title>
+    <meta name="keywords" content="C2C房屋出租" />
+    <meta name="description" content="本网站提供房屋出租服务" />
+    <link rel="stylesheet" href="/Public/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/Public/css/home/main.css" type="text/css" />
+
+
+    <script src="/Public/js/jquery.js"></script>
+    <script src="/Public/js/bootstrap.min.js"></script>
+    <script src="/Public/js/dialog/layer.js"></script>
+    <script src="/Public/js/dialog.js"></script>
+    <script type="text/javascript" src="/Public/js/party/jquery.uploadify.js"></script>
+
+    <style>
+        
+    </style>
+
+    <meta charset="UTF-8">
+    <title>房屋详情</title>
+
+    <style>
+        .sel {
+            width: 89px;
+            height: 50px;
+            top: 2px;
+            right: 20px;
+            position: absolute;
+            background: #ffffff;
+        }
+        .black_overlay{ 
+            display: none; 
+            position: absolute; 
+            top: 0%; 
+            left: 0%; 
+            width: 100%; 
+            height: 100%; 
+            background-color: black; 
+            z-index:1001; 
+            -moz-opacity: 0.8; 
+            opacity:.80; 
+            filter: alpha(opacity=88); 
+        } 
+        .white_content { 
+            display: none; 
+            position: absolute; 
+             
+            left: 30%; 
+            width: 40%; 
+            height: 100%; 
+            padding: 20px; 
+            background-color:rgba(255,255,255,0.5); 
+            
+            z-index:1002; 
+            overflow: auto; 
+        } 
+        .dis1{
+            display:-moz-box;-moz-box-orient:vertical;margin-bottom: 20px;
+        }
+        .dis2{
+            width: 100px;margin-left: 170px;font-size: 20px;
+        }
+    </style>
+</head>
+<body   background="city_bg.jpg"
+        style=" background-repeat:no-repeat ;
+                background-size:cover;
+                background-attachment: fixed;"
+>
+
+        <header id="header"  style="position: fixed; z-index:1000;margin-right:0px ;width:100%">
+                <div class="navbar-inverse">
+                    <div class="container" >
+                        <div class="navbar-header">
+                            <a href="/">
+                                <img src="/Public/images/logo.png" alt="">
+                            </a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-left">
+                            <li><a href="http://localhost/admin.php?m=index&c=index" >首页</a></li>
+                            <li><a href="http://localhost/admin.php?m=index&c=request" >求租</a></li>
+                            <li><a href="http://localhost/admin.php?m=index&c=rent" >出租</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+    
+        <div >
+            <img style="margin-top:100px;margin-left: 150px;float:left;" 
+                        width="600px;font-weight：bold;"  src="room.jpg">  
+
+            <div style="padding-top:100px;float:right;margin-right:200px;">
+                <div class="dis1">
+                    <span style="width: 100px;margin-left: 140px;font-size: 40px;">{$positions.hotel_city}</span>
+                    <span style="width: 100px;font-size: 40px;">{$positions.hotel_county}</span>
+                    <span style="width: 100px;font-size: 40px;">{$positions.hotel_street}</span>
+                </div>
+                <div class="dis1">
+                    <span style="width: 200px;color: #ac2925;margin-left: 170px;font-size: 30px;">{$positions.hotel_cost}元/月</span>
+                </div>
+                
+                <div class="dis1">
+                    <span class="dis2">房源类型：</span>
+                    <span style="width: 100px;font-size: 20px;">{$positions.hotel_type}</span>
+                </div>
+                <div class="dis1">
+                    <span class="dis2">起租时间(可以入住时间)：{$positions.start_time}</span>
+                </div>
+                <div class="dis1">
+                    <span class="dis2">最低租用月数：{$positions.limit_months}个月</span>
+                </div>
+             
+                <div class="dis1">
+                    <span style="width: 100px;margin-left: 170px;font-size: 20px;">联系电话：54545465{$positions.phonenumber}</span>
+                </div>
+               
+                
+        
+
+                <a  style="margin-left:180px;" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';
+                            document.getElementById('fade').style.display='block'">
+                            <input type="submit" value="提交订单" name="button"  
+                                   style="height:45px;width:120px;color:white;background-color:#FE9A2E;border:none;" > 
+                            </a>
+        </div>
+        <div id="light" class="white_content">
+            <a style="float:right;color:white" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';
+                    document.getElementById('fade').style.display='none'">关闭</a>
+            </br>
+            <div  style="font-size:30px;text-align:center">租房订单确认</div>
+            </br>
+            <img style="margin-left: 10px;float:left;"  width="200px;font-weight：bold;"  src="room.jpg">  
+            <span style="font-size:20px">&nbsp;&nbsp;位置信息：{$positions.hotel_city}&nbsp;{$positions.hotel_county}&nbsp;{$positions.hotel_street}
+                                            </br></br>&nbsp;&nbsp;价格：{$positions.hotel_cost}元/月</span>
+           
+            <form name="list" method="POST" action="/admin.php?m=index&c=detailscat&a=index" >
+            
+           
+            </br> </br> </br> </br> </br>
+            </br>
+            
+            <span style="font-size:20px;margin-left:50px;">用户ID<input style="margin-left:29px;"type="text" name="user_id" placeholder="请输入用户ID"/></br> </span>
+            </br></br>
+            <span style="font-size:20px;margin-left:50px;">入住日期<input style="margin-left:10px;"type="text" name="order_start" placeholder="2018-05-02"/></br> </span>
+            </br></br>
+            <span style="font-size:20px;margin-left:50px;">离开日期<input style="margin-left:10px;"type="text" name="order_end" placeholder="2018-06-05"/></br> </span>
+            
+            
+              <input type="submit" value="确认提交" name="button" 
+                     style="height:45px;width:120px;color:white;background-color:#FE9A2E;border:none;
+                            position:absoluted;margin-left:400px;margin-top:220px;" > 
+                
+
+            </form>
+            
+            
+        </div> 
+        <div id="fade" class="black_overlay">
+        </div> 
+        </div>
+
+        
+
+
+
+
+</body>
+</html>
+<script>
+    var SCOPE = {
+        'save_url' : '/index.php?c=detailscat&a=save',
+        'jump_url' : '/index.php?c=detailscat'
+    };
+
+    function allimg(img) {
+        if(img.url_2){
+            return '<img width="130" height="110" src="img.url_2" alt="图片不存在！">';
+        }
+        else{
+            return '<img width="130" height="110" src="img.url_2" alt="图片不存在！">';
+        }
+    }
+</script>
+<script type="text/javascript" src="/Public/js/admin/form.js"></script>
+<script src="/Public/js/jquery.js"></script>
+<script src="/Public/js/count.js"></script>
+
+
+<script language="JavaScript">
+    function judgeLogin(){
+
+    }
+</script>

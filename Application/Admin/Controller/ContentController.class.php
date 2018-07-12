@@ -41,6 +41,8 @@ class ContentController extends CommonController {
         if($_POST) {
             if(!isset($_POST['title']) || !$_POST['title']) {
                 return show(0,'标题不存在');
+
+                
             }
             if(!isset($_POST['small_title']) || !$_POST['small_title']) {
                 return show(0,'短标题不存在');
