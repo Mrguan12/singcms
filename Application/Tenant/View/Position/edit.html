@@ -117,6 +117,20 @@
 					</div>
 
 					<div class="form-group">
+						<label for="inputcost" class="col-sm-2 control-label">房源的起租时间：</label>
+						<div class="col-sm-5">
+							<input type="date" name="start_time" value="{$vo.start_time}" class="form-control" id="inputdata" placeholder="请选择房源的起租时间">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputcost" class="col-sm-2 control-label">房源的可租时间：</label>
+						<div class="col-sm-5">
+							<input type="text" name="limit_months" value="{$vo.limit_months}" class="form-control" id="inputmonth" placeholder="请选择房源的可租时间">
+						</div>
+					</div>
+
+					<div class="form-group">
 						<input type="hidden" name="status" value="{$vo.status}">
 					</div>
 
